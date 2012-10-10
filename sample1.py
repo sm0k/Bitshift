@@ -38,7 +38,7 @@ for base in bases:
 
 # You can also:
 		
-# bitshift.get_tables_names_like(database)
+# bitshift.get_tables_names(database)
 
 # bitshift.get_columns_names(schema=databases,table=table)
 
