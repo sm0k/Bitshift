@@ -1,6 +1,6 @@
 
-<pre>Should add POST support soon
-$ time ./sample1.py 
+<pre>Should add POST support soon</pre>
+<pre>$ time ./sample1.py 
 User : root@localhost
 Version : 5.0.51a-3ubuntu5.7
 Current DB : typo3
